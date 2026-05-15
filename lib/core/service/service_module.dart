@@ -1,10 +1,18 @@
+import 'package:alice/alice.dart';
+import 'package:alice_dio/alice_dio_adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'dio_service.dart';
 import 'interceptors.dart';
 
 class ServiceModule {
-  Future<void> call(GetIt di, {required String baseUrl}) async {
+  Future<void> call(
+    GetIt di, {
+    required String baseUrl,
+    required Alice alice,
+  }) async {
+    AliceDioAdapter aliceDioAdapter = AliceDioAdapter();
+    alice.addAdapter(aliceDioAdapter);
     di.registerLazySingleton<DioService>(() {
       final dio = Dio(
         BaseOptions(
@@ -18,10 +26,7 @@ class ServiceModule {
 
       return DioService(
         dioClient: dio,
-        interceptors: [
-          LoggingInterceptor(),
-          ErrorInterceptor(),
-        ],
+        interceptors: [LoggingInterceptor(), ErrorInterceptor()],
       );
     });
   }
