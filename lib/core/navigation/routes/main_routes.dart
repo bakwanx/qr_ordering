@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_ordering/core/navigation/nav_list/scanner_nav.dart';
+import 'package:qr_ordering/core/navigation/routes/cart_routes.dart';
 import 'package:qr_ordering/core/navigation/routes/menu_routes.dart';
 import 'package:qr_ordering/core/navigation/routes/scanner_routes.dart';
 import 'package:qr_ordering/core/navigation/utils/util_router.dart';
@@ -15,6 +16,7 @@ class MainRoutes {
     routes: [
       ScannerRoutes(),
       MenuRoutes(),
+      CartRoutes(),
     ],
   );
 }

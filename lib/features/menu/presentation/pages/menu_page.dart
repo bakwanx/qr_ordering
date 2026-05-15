@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:qr_ordering/core/cubit/qr_ordering_status.dart';
 import 'package:qr_ordering/core/dependency_injection/dependency_injection.dart';
+import 'package:qr_ordering/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:qr_ordering/features/cart/presentation/widgets/add_to_cart_sheet.dart';
 import 'package:qr_ordering/features/menu/domain/entities/menu_item_entity.dart';
-import 'package:qr_ordering/features/menu/domain/repositories/menu_navigation_repository.dart';
+import 'package:qr_ordering/features/cart/presentation/pages/cart_page.dart';
 import 'package:qr_ordering/features/menu/presentation/cubit/menu_cubit.dart';
 import 'package:qr_ordering/features/menu/presentation/widgets/menu_category_tab.dart';
 import 'package:qr_ordering/features/menu/presentation/widgets/menu_item_card.dart';
@@ -17,8 +19,15 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MenuCubit>(
-      create: (_) => di<MenuCubit>()..fetchMenu(tableId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MenuCubit>(
+          create: (_) => di<MenuCubit>()..fetchMenu(tableId),
+        ),
+        BlocProvider<CartCubit>(
+          create: (_) => di<CartCubit>()..initTable(tableId),
+        ),
+      ],
       child: _MenuPageView(tableId: tableId),
     );
   }
@@ -30,7 +39,13 @@ class _MenuPageView extends StatelessWidget {
   const _MenuPageView({required this.tableId});
 
   void _openAddToCartSheet(BuildContext context, MenuItemEntity item) {
-    di<MenuNavigationRepository>().goToCartPage(context, tableId: tableId);
+    AddToCartSheet.show(
+      context,
+      item: item,
+      onConfirm: (item, selections) {
+        context.read<CartCubit>().addItem(item, selections);
+      },
+    );
   }
 
   @override
@@ -41,24 +56,42 @@ class _MenuPageView extends StatelessWidget {
         final isTablet = screenWidth >= 600;
         final crossAxisCount = screenWidth >= 900 ? 3 : (isTablet ? 2 : 1);
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              state.restaurant?.name ?? 'Menu',
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: Chip(
-                  avatar: const Icon(Icons.table_restaurant, size: 16),
-                  label: Text('Table ${state.tableId}'),
+        return BlocBuilder<CartCubit, CartState>(
+          builder: (_, cartState) => Scaffold(
+            appBar: AppBar(
+              title: Text(state.restaurant?.name ?? 'Menu'),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Chip(
+                    avatar: const Icon(Icons.table_restaurant, size: 16),
+                    label: Text('Table ${state.tableId}'),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          body: RefreshIndicator(
-            onRefresh: () => context.read<MenuCubit>().fetchMenu(tableId),
-            child: _buildBody(context, state, crossAxisCount),
+              ],
+            ),
+            floatingActionButton: cartState.itemCount > 0
+                ? FloatingActionButton.extended(
+                    heroTag: 'cart_fab',
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: context.read<CartCubit>(),
+                          child: CartPage(tableId: tableId),
+                        ),
+                      ),
+                    ),
+                    icon: const Icon(Icons.shopping_cart),
+                    label: Text(
+                      '${cartState.itemCount} item${cartState.itemCount != 1 ? 's' : ''} · \$${cartState.subtotal.toStringAsFixed(2)}',
+                    ),
+                  )
+                : null,
+            body: RefreshIndicator(
+              onRefresh: () => context.read<MenuCubit>().fetchMenu(tableId),
+              child: _buildBody(context, state, crossAxisCount),
+            ),
           ),
         );
       },
