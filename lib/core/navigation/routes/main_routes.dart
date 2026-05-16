@@ -14,11 +14,6 @@ class MainRoutes {
     initialLocation: ScannerNav.scanner.path,
     debugLogDiagnostics: kDebugMode,
     navigatorKey: rootNavigatorKey,
-    routes: [
-      ScannerRoutes(),
-      MenuRoutes(),
-      CartRoutes(),
-      OrderRoutes(),
-    ],
+    routes: [ScannerRoutes(), MenuRoutes(), CartRoutes(), OrderRoutes()],
   );
 }

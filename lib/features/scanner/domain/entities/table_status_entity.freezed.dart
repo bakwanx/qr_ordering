@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TableStatusEntity {
 
- String get tableId; String get status; String? get restaurantId; String? get restaurantName;
+ String get tableId; String get status; String? get restaurantId;
 /// Create a copy of TableStatusEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TableStatusEntityCopyWith<TableStatusEntity> get copyWith => _$TableStatusEntit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TableStatusEntity&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId)&&(identical(other.restaurantName, restaurantName) || other.restaurantName == restaurantName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TableStatusEntity&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId,restaurantName);
+int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId);
 
 @override
 String toString() {
-  return 'TableStatusEntity(tableId: $tableId, status: $status, restaurantId: $restaurantId, restaurantName: $restaurantName)';
+  return 'TableStatusEntity(tableId: $tableId, status: $status, restaurantId: $restaurantId)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TableStatusEntityCopyWith<$Res>  {
   factory $TableStatusEntityCopyWith(TableStatusEntity value, $Res Function(TableStatusEntity) _then) = _$TableStatusEntityCopyWithImpl;
 @useResult
 $Res call({
- String tableId, String status, String? restaurantId, String? restaurantName
+ String tableId, String status, String? restaurantId
 });
 
 
@@ -62,12 +62,11 @@ class _$TableStatusEntityCopyWithImpl<$Res>
 
 /// Create a copy of TableStatusEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tableId = null,Object? status = null,Object? restaurantId = freezed,Object? restaurantName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tableId = null,Object? status = null,Object? restaurantId = freezed,}) {
   return _then(_self.copyWith(
 tableId: null == tableId ? _self.tableId : tableId // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,restaurantId: freezed == restaurantId ? _self.restaurantId : restaurantId // ignore: cast_nullable_to_non_nullable
-as String?,restaurantName: freezed == restaurantName ? _self.restaurantName : restaurantName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -150,10 +149,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tableId,  String status,  String? restaurantId,  String? restaurantName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tableId,  String status,  String? restaurantId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TableStatusEntity() when $default != null:
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);case _:
+return $default(_that.tableId,_that.status,_that.restaurantId);case _:
   return orElse();
 
 }
@@ -171,10 +170,10 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tableId,  String status,  String? restaurantId,  String? restaurantName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tableId,  String status,  String? restaurantId)  $default,) {final _that = this;
 switch (_that) {
 case _TableStatusEntity():
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);}
+return $default(_that.tableId,_that.status,_that.restaurantId);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -188,10 +187,10 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tableId,  String status,  String? restaurantId,  String? restaurantName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tableId,  String status,  String? restaurantId)?  $default,) {final _that = this;
 switch (_that) {
 case _TableStatusEntity() when $default != null:
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);case _:
+return $default(_that.tableId,_that.status,_that.restaurantId);case _:
   return null;
 
 }
@@ -203,13 +202,12 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 
 
 class _TableStatusEntity implements TableStatusEntity {
-  const _TableStatusEntity({required this.tableId, required this.status, this.restaurantId, this.restaurantName});
+  const _TableStatusEntity({required this.tableId, required this.status, this.restaurantId});
   
 
 @override final  String tableId;
 @override final  String status;
 @override final  String? restaurantId;
-@override final  String? restaurantName;
 
 /// Create a copy of TableStatusEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +219,16 @@ _$TableStatusEntityCopyWith<_TableStatusEntity> get copyWith => __$TableStatusEn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TableStatusEntity&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId)&&(identical(other.restaurantName, restaurantName) || other.restaurantName == restaurantName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TableStatusEntity&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId,restaurantName);
+int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId);
 
 @override
 String toString() {
-  return 'TableStatusEntity(tableId: $tableId, status: $status, restaurantId: $restaurantId, restaurantName: $restaurantName)';
+  return 'TableStatusEntity(tableId: $tableId, status: $status, restaurantId: $restaurantId)';
 }
 
 
@@ -241,7 +239,7 @@ abstract mixin class _$TableStatusEntityCopyWith<$Res> implements $TableStatusEn
   factory _$TableStatusEntityCopyWith(_TableStatusEntity value, $Res Function(_TableStatusEntity) _then) = __$TableStatusEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String tableId, String status, String? restaurantId, String? restaurantName
+ String tableId, String status, String? restaurantId
 });
 
 
@@ -258,12 +256,11 @@ class __$TableStatusEntityCopyWithImpl<$Res>
 
 /// Create a copy of TableStatusEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tableId = null,Object? status = null,Object? restaurantId = freezed,Object? restaurantName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tableId = null,Object? status = null,Object? restaurantId = freezed,}) {
   return _then(_TableStatusEntity(
 tableId: null == tableId ? _self.tableId : tableId // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,restaurantId: freezed == restaurantId ? _self.restaurantId : restaurantId // ignore: cast_nullable_to_non_nullable
-as String?,restaurantName: freezed == restaurantName ? _self.restaurantName : restaurantName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

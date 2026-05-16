@@ -1,3 +1,4 @@
+import 'package:qr_ordering/core/master_data/base_reponse_model.dart';
 import 'package:qr_ordering/core/service/dio_service.dart';
 import 'package:qr_ordering/features/order/data/models/create_order_request_model.dart';
 import 'package:qr_ordering/features/order/data/models/order_status_model.dart';
@@ -23,9 +24,14 @@ class OrderRemoteDsImpl implements OrderRemoteDs {
 
   @override
   Future<OrderStatusModel> getOrderStatus(String orderId) async {
-    final response = await _dioService.get<Map<String, dynamic>>(
-      '/orders/$orderId',
+    return _dioService.get(
+      endpoint: '/orders/$orderId',
+      converter: (response) {
+        return BaseResponse<OrderStatusModel>.fromJson(
+          response,
+          (json) => OrderStatusModel.fromJson(json),
+        ).data!;
+      },
     );
-    return OrderStatusModel.fromJson(response.data!);
   }
 }

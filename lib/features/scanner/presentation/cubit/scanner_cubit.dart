@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:qr_ordering/core/cubit/qr_ordering_status.dart';
@@ -34,7 +35,9 @@ class ScannerCubit extends Cubit<ScannerState> {
         state.copyWith(
           scanStatus: QrOrderingStatus.invalid,
           tableId: null,
-          failure: const UnknownFailure(message: 'QR code has an empty table ID.'),
+          failure: const UnknownFailure(
+            message: 'QR code has an empty table ID.',
+          ),
         ),
       );
       return;
@@ -73,7 +76,11 @@ class ScannerCubit extends Cubit<ScannerState> {
           );
         },
       );
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        debugPrint('Parsing error st: ${s.toString()}');
+        debugPrint('Parsing error ex: ${e.toString()}');
+      }
       emit(
         state.copyWith(
           scanStatus: QrOrderingStatus.submissionFailure,

@@ -32,9 +32,9 @@ class _ScannerPageState extends State<ScannerPage> {
       child: BlocConsumer<ScannerCubit, ScannerState>(
         listener: (context, state) {
           if (state.scanStatus == QrOrderingStatus.submissionSuccess &&
-              state.tableId != null &&
-              !_hasNavigated) {
+              state.tableId != null) {
             _hasNavigated = true;
+            print('pesan 1');
             di<ScannerNavigationRepository>().goToMenuPage(
               context,
               tableId: state.tableId!,
@@ -46,7 +46,8 @@ class _ScannerPageState extends State<ScannerPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  state.failure?.message ?? 'An error occurred. Please try again.',
+                  state.failure?.message ??
+                      'An error occurred. Please try again.',
                 ),
               ),
             );
@@ -148,9 +149,9 @@ class _ScannerOverlay extends StatelessWidget {
               else
                 Text(
                   'Point your camera at the table QR code',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   textAlign: TextAlign.center,
                   semanticsLabel: 'Scanner instruction',
                 ),

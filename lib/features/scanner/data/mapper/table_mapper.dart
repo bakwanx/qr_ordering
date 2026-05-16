@@ -8,7 +8,6 @@ extension TableStatusMapper on TableStatusModel {
       tableId: tableId.orEmpty(),
       status: status.orEmpty(),
       restaurantId: restaurantId,
-      restaurantName: restaurantName,
     );
   }
 }

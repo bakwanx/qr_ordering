@@ -1,3 +1,4 @@
+import 'package:qr_ordering/core/master_data/base_reponse_model.dart';
 import 'package:qr_ordering/core/service/dio_service.dart';
 import 'package:qr_ordering/features/scanner/data/models/table_status_model.dart';
 
@@ -12,9 +13,14 @@ class ScannerRemoteDsImpl implements ScannerRemoteDs {
 
   @override
   Future<TableStatusModel> getTableStatus(String tableId) async {
-    final response = await _dioService.get<Map<String, dynamic>>(
-      '/tables/$tableId/status',
+    return _dioService.get(
+      endpoint: '/tables/$tableId/status',
+      converter: (response) {
+        return BaseResponse<TableStatusModel>.fromJson(
+          response,
+          (json) => TableStatusModel.fromJson(json),
+        ).data!;
+      },
     );
-    return TableStatusModel.fromJson(response.data!);
   }
 }

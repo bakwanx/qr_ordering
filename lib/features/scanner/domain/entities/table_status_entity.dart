@@ -8,6 +8,5 @@ sealed class TableStatusEntity with _$TableStatusEntity {
     required String tableId,
     required String status,
     String? restaurantId,
-    String? restaurantName,
   }) = _TableStatusEntity;
 }

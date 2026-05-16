@@ -19,7 +19,8 @@ class OrderConfirmationPage extends StatelessWidget {
       create: (_) => di<OrderCubit>(),
       child: BlocConsumer<OrderCubit, OrderState>(
         listener: (context, state) {
-          if (state.submitStatus == QrOrderingStatus.submissionSuccess && state.orderId != null) {
+          if (state.submitStatus == QrOrderingStatus.submissionSuccess &&
+              state.orderId != null) {
             context.read<CartCubit>().clearCart();
             di<OrderNavigationRepository>().goToOrderTrackingPage(
               context,
@@ -28,13 +29,18 @@ class OrderConfirmationPage extends StatelessWidget {
             );
           } else if (state.submitStatus == QrOrderingStatus.submissionFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.failure?.message ?? 'Failed to submit order')),
+              SnackBar(
+                content: Text(
+                  state.failure?.message ?? 'Failed to submit order',
+                ),
+              ),
             );
           }
         },
         builder: (context, state) {
-          final cartState = context.read<CartCubit>().state;
-          final isLoading = state.submitStatus == QrOrderingStatus.submissionInProgress;
+          final cartState = di<CartCubit>().state;
+          final isLoading =
+              state.submitStatus == QrOrderingStatus.submissionInProgress;
 
           return Scaffold(
             appBar: AppBar(title: const Text('Confirm Order')),
@@ -51,7 +57,9 @@ class OrderConfirmationPage extends StatelessWidget {
                         return ListTile(
                           title: Text(item.name),
                           subtitle: Text('Quantity: ${item.quantity}'),
-                          trailing: Text('\$${item.subtotal.toStringAsFixed(2)}'),
+                          trailing: Text(
+                            '\$${item.subtotal.toStringAsFixed(2)}',
+                          ),
                         );
                       },
                     ),
@@ -62,8 +70,14 @@ class OrderConfirmationPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Total', style: Theme.of(context).textTheme.titleLarge),
-                        Text('\$${cartState.subtotal.toStringAsFixed(2)}', style: Theme.of(context).textTheme.titleLarge),
+                        Text(
+                          'Total',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        Text(
+                          '\$${cartState.subtotal.toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ],
                     ),
                   ),
@@ -75,17 +89,25 @@ class OrderConfirmationPage extends StatelessWidget {
                               tableId: tableId,
                               customerNote: cartState.customerNote,
                               items: cartState.cartItems
-                                  .map((i) => OrderItemEntity(
-                                        menuItemId: i.menuItemId,
-                                        quantity: i.quantity,
-                                        customizationOptionIds: i.customizations.map((c) => c.optionId).toList(),
-                                      ))
+                                  .map(
+                                    (i) => OrderItemEntity(
+                                      menuItemId: i.menuItemId,
+                                      quantity: i.quantity,
+                                      customizationOptionIds: i.customizations
+                                          .map((c) => c.optionId)
+                                          .toList(),
+                                    ),
+                                  )
                                   .toList(),
                             );
                             context.read<OrderCubit>().submitOrder(request);
                           },
                     child: isLoading
-                        ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
                         : const Text('Confirm and Pay'),
                   ),
                 ],

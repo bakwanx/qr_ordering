@@ -10,8 +10,8 @@ class DependencyInjection {
   final ServiceModule _serviceModule = ServiceModule();
   final NavigationModule _navigationModule = NavigationModule();
 
-  Future<void> injectApp({required Alice alice}) async {
-    await _serviceModule(di, baseUrl: '$baseUrl/api/$apiVersion', alice: alice);
+  Future<void> injectApp() async {
+    await _serviceModule(di, baseUrl: '$baseUrl/api/$apiVersion');
     await _navigationModule(di);
   }
 }

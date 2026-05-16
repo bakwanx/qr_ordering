@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TableStatusModel {
 
-@JsonKey(name: 'table_id') String? get tableId; String? get status;@JsonKey(name: 'restaurant_id') String? get restaurantId;@JsonKey(name: 'restaurant_name') String? get restaurantName;
+@JsonKey(name: 'id') String? get tableId;@JsonKey(name: 'status') String? get status;@JsonKey(name: 'restaurant_id') String? get restaurantId;
 /// Create a copy of TableStatusModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TableStatusModelCopyWith<TableStatusModel> get copyWith => _$TableStatusModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TableStatusModel&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId)&&(identical(other.restaurantName, restaurantName) || other.restaurantName == restaurantName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TableStatusModel&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId,restaurantName);
+int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId);
 
 @override
 String toString() {
-  return 'TableStatusModel(tableId: $tableId, status: $status, restaurantId: $restaurantId, restaurantName: $restaurantName)';
+  return 'TableStatusModel(tableId: $tableId, status: $status, restaurantId: $restaurantId)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TableStatusModelCopyWith<$Res>  {
   factory $TableStatusModelCopyWith(TableStatusModel value, $Res Function(TableStatusModel) _then) = _$TableStatusModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'table_id') String? tableId, String? status,@JsonKey(name: 'restaurant_id') String? restaurantId,@JsonKey(name: 'restaurant_name') String? restaurantName
+@JsonKey(name: 'id') String? tableId,@JsonKey(name: 'status') String? status,@JsonKey(name: 'restaurant_id') String? restaurantId
 });
 
 
@@ -65,12 +65,11 @@ class _$TableStatusModelCopyWithImpl<$Res>
 
 /// Create a copy of TableStatusModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tableId = freezed,Object? status = freezed,Object? restaurantId = freezed,Object? restaurantName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tableId = freezed,Object? status = freezed,Object? restaurantId = freezed,}) {
   return _then(_self.copyWith(
 tableId: freezed == tableId ? _self.tableId : tableId // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,restaurantId: freezed == restaurantId ? _self.restaurantId : restaurantId // ignore: cast_nullable_to_non_nullable
-as String?,restaurantName: freezed == restaurantName ? _self.restaurantName : restaurantName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -153,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'table_id')  String? tableId,  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId, @JsonKey(name: 'restaurant_name')  String? restaurantName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? tableId, @JsonKey(name: 'status')  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TableStatusModel() when $default != null:
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);case _:
+return $default(_that.tableId,_that.status,_that.restaurantId);case _:
   return orElse();
 
 }
@@ -174,10 +173,10 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'table_id')  String? tableId,  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId, @JsonKey(name: 'restaurant_name')  String? restaurantName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? tableId, @JsonKey(name: 'status')  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId)  $default,) {final _that = this;
 switch (_that) {
 case _TableStatusModel():
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);}
+return $default(_that.tableId,_that.status,_that.restaurantId);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -191,10 +190,10 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'table_id')  String? tableId,  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId, @JsonKey(name: 'restaurant_name')  String? restaurantName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? tableId, @JsonKey(name: 'status')  String? status, @JsonKey(name: 'restaurant_id')  String? restaurantId)?  $default,) {final _that = this;
 switch (_that) {
 case _TableStatusModel() when $default != null:
-return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantName);case _:
+return $default(_that.tableId,_that.status,_that.restaurantId);case _:
   return null;
 
 }
@@ -206,13 +205,12 @@ return $default(_that.tableId,_that.status,_that.restaurantId,_that.restaurantNa
 @JsonSerializable()
 
 class _TableStatusModel implements TableStatusModel {
-  const _TableStatusModel({@JsonKey(name: 'table_id') this.tableId, this.status, @JsonKey(name: 'restaurant_id') this.restaurantId, @JsonKey(name: 'restaurant_name') this.restaurantName});
+  const _TableStatusModel({@JsonKey(name: 'id') this.tableId, @JsonKey(name: 'status') this.status, @JsonKey(name: 'restaurant_id') this.restaurantId});
   factory _TableStatusModel.fromJson(Map<String, dynamic> json) => _$TableStatusModelFromJson(json);
 
-@override@JsonKey(name: 'table_id') final  String? tableId;
-@override final  String? status;
+@override@JsonKey(name: 'id') final  String? tableId;
+@override@JsonKey(name: 'status') final  String? status;
 @override@JsonKey(name: 'restaurant_id') final  String? restaurantId;
-@override@JsonKey(name: 'restaurant_name') final  String? restaurantName;
 
 /// Create a copy of TableStatusModel
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +225,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TableStatusModel&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId)&&(identical(other.restaurantName, restaurantName) || other.restaurantName == restaurantName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TableStatusModel&&(identical(other.tableId, tableId) || other.tableId == tableId)&&(identical(other.status, status) || other.status == status)&&(identical(other.restaurantId, restaurantId) || other.restaurantId == restaurantId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId,restaurantName);
+int get hashCode => Object.hash(runtimeType,tableId,status,restaurantId);
 
 @override
 String toString() {
-  return 'TableStatusModel(tableId: $tableId, status: $status, restaurantId: $restaurantId, restaurantName: $restaurantName)';
+  return 'TableStatusModel(tableId: $tableId, status: $status, restaurantId: $restaurantId)';
 }
 
 
@@ -247,7 +245,7 @@ abstract mixin class _$TableStatusModelCopyWith<$Res> implements $TableStatusMod
   factory _$TableStatusModelCopyWith(_TableStatusModel value, $Res Function(_TableStatusModel) _then) = __$TableStatusModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'table_id') String? tableId, String? status,@JsonKey(name: 'restaurant_id') String? restaurantId,@JsonKey(name: 'restaurant_name') String? restaurantName
+@JsonKey(name: 'id') String? tableId,@JsonKey(name: 'status') String? status,@JsonKey(name: 'restaurant_id') String? restaurantId
 });
 
 
@@ -264,12 +262,11 @@ class __$TableStatusModelCopyWithImpl<$Res>
 
 /// Create a copy of TableStatusModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tableId = freezed,Object? status = freezed,Object? restaurantId = freezed,Object? restaurantName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tableId = freezed,Object? status = freezed,Object? restaurantId = freezed,}) {
   return _then(_TableStatusModel(
 tableId: freezed == tableId ? _self.tableId : tableId // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,restaurantId: freezed == restaurantId ? _self.restaurantId : restaurantId // ignore: cast_nullable_to_non_nullable
-as String?,restaurantName: freezed == restaurantName ? _self.restaurantName : restaurantName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
